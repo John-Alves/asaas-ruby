@@ -40,16 +40,32 @@ require 'asaas-ruby'
 
 Asaas.setup do |config|
   config.token = '87d4fd66fec6c605fb00f8da81fee16965561bedfc2f4c4066e533cbaf3cece9'
+  config.debug = true
 end
 
 asaas_client = Asaas::Client.new()
 
-customer = Asaas::Customer.new({name: 'Thiago Diniz', cpfCnpj: '05201932419', email: 'email@example.org'})
-asaas_client.customers.create(customer)
+customer = Asaas::Customer.new({
+  name: 'Johnny Alves', 
+  cpfCnpj: '44929287073',
+  email: 'email@example.org'
+})
+customer_entity = asaas_client.customers.create(customer)
+
+token = Asaas::CreditCardToken.new({
+  creditCardCcv: '123',
+  creditCardHolderName: "Juscelino Kubitschek",
+  creditCardExpiryMonth: 01, 
+  creditCardExpiryYear: 2025, 
+  creditCardNumber: 12345567812345678, 
+  customer: customer_entity.id
+})
+
+response = asaas_client.credit_card_tokens.create(token)
 
 charge = Asaas::Payment.new({
-  customer: customer.id,
-  dueDate: '2019-10-10',
+  customer: customer_entity.id,
+  dueDate: DateTime.now,
   billingType: 'BOLETO',
   description: "Teste de boleto",
   value: BigDecimal("103.54").to_f,

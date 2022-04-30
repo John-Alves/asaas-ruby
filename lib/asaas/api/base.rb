@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module Asaas
   module Api
     class Base
-
       attr_reader :endpoint
       attr_reader :meta
       attr_reader :errors
@@ -21,7 +22,7 @@ module Asaas
       end
 
       def get(id)
-        request(:get, {id: id})
+        request(:get, id: id)
         parse_response
       end
 
@@ -36,41 +37,40 @@ module Asaas
       end
 
       def update(attrs)
-        request(:post, {id: attrs.id}, attrs)
+        request(:post, { id: attrs.id }, attrs)
         parse_response
       end
 
       def delete(id)
-        request(:delete, {id: id})
+        request(:delete, id: id)
         parse_response
       end
 
       protected
+
       def parse_url(id = nil)
         u = URI(@endpoint + @route)
-        if id
-          u.path += "/#{id}"
-        end
+        u.path += "/#{id}" if id
         u.to_s
       end
 
       def parse_response
-        res =  @response.response_code
+        res = @response.response_code
         puts res if Asaas::Configuration.debug
-        case @response.response_code
-          when 200
-            res = response_success
-          when 400
-            res = response_bad_request
-          when 401
-            res = response_unauthorized
-          when 404
-            res = response_not_found
-          when 500
-            res = response_internal_server_error
-          else
-            res = response_not_found
-        end
+        res = case @response.response_code
+              when 200
+                response_success
+              when 400
+                response_bad_request
+              when 401
+                response_unauthorized
+              when 404
+                response_not_found
+              when 500
+                response_internal_server_error
+              else
+                response_not_found
+              end
         res
       end
 
@@ -80,24 +80,24 @@ module Asaas
         else
           "Asaas::#{type.capitalize}".constantize
         end
-      rescue
+      rescue StandardError
         Asaas::Entity::Base
       end
 
       def request(method, params = {}, body = nil)
         body = body.to_h
-        body = body.delete_if { |k, v| v.nil? || v.to_s.empty? }
+        body = body.delete_if { |_k, v| v.nil? || v.to_s.empty? }
         body = body.to_json
         @response = Typhoeus::Request.new(
-            parse_url(params.fetch(:id, false)),
-            method: method,
-            body: body,
-            params: params,
-            headers: {
-              'access_token': @token || Asaas::Configuration.token,
-              'Content-Type': 'application/json'
-             },
-            verbose: Asaas::Configuration.debug
+          parse_url(params.fetch(:id, false)),
+          method: method,
+          body: body,
+          params: params,
+          headers: {
+            'access_token': @token || Asaas::Configuration.token,
+            'Content-Type': 'application/json'
+          },
+          verbose: Asaas::Configuration.debug
         ).run
       end
 
@@ -105,10 +105,10 @@ module Asaas
         entity = nil
         hash = JSON.parse(@response.body)
         puts hash if Asaas::Configuration.debug
-        if hash.fetch("object", false) === "list"
+        if hash.fetch('object', false) === 'list'
           entity = Asaas::Entity::Meta.new(hash)
         else
-          entity = convert_data_to_entity(hash.fetch("object", false))
+          entity = convert_data_to_entity(hash.fetch('object', false))
           entity = entity.new(hash) if entity
         end
 
@@ -137,12 +137,12 @@ module Asaas
         error = Asaas::Entity::Error.new
         begin
           hash = JSON.parse(@response.body)
-          errors = hash.fetch("errors", [])
+          errors = hash.fetch('errors', [])
           errors.each do |item|
             error.errors << Asaas::Entity::ErrorItem.new(item)
           end
           error
-        rescue
+        rescue StandardError
           error = Asaas::Entity::Error.new
           error.errors << Asaas::Entity::ErrorItem.new(code: 'bad_request', description: 'Bad Request')
           error
