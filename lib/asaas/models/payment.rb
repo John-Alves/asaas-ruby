@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Asaas
   class Payment < Model
-    BillingTypes = Types::Strict::String.enum('BOLETO', 'CREDIT_CARD', 'UNDEFINED', 'TRANSFER', 'DEPOSIT')
+    BillingTypes = Types::Strict::String.enum('BOLETO', 'CREDIT_CARD', 'UNDEFINED', 'TRANSFER', 'DEPOSIT', 'PIX')
     Status = Types::Strict::String.enum('PENDING', 'RECEIVED', 'CONFIRMED', 'OVERDUE', 'REFUNDED', 'RECEIVED_IN_CASH', 'REFUND_REQUESTED', 'CHARGEBACK_DISPUTE', 'AWAITING_CHARGEBACK_REVERSAL')
 
     attribute :id, Types::Coercible::String.optional.default(nil)

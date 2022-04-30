@@ -28,6 +28,10 @@ module Asaas
       @payments ||= Asaas::Api::Payment.new(@token, @api_version)
     end
 
+    def credit_card_tokens
+      @credit_card_tokens ||= Asaas::Api::CreditCardToken.new(@token, @api_version)
+    end
+
     def subscriptions
       @subscriptions ||= Asaas::Api::Subscription.new(@token, @api_version)
     end

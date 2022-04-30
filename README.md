@@ -39,7 +39,7 @@ gem build asaas-ruby.gemspec
 require 'asaas-ruby'
 
 Asaas.setup do |config|
-  config.token = 'token'
+  config.token = '87d4fd66fec6c605fb00f8da81fee16965561bedfc2f4c4066e533cbaf3cece9'
 end
 
 asaas_client = Asaas::Client.new()
