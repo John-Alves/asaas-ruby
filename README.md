@@ -46,9 +46,10 @@ end
 asaas_client = Asaas::Client.new()
 
 customer = Asaas::Customer.new({
-  name: 'Johnny Alves', 
+  name: 'Matheus Lessa', 
   cpfCnpj: '44929287073',
-  email: 'email@example.org'
+  email: 'mathewslessa@gmail.com',
+  id: 'cus_000004838427',
 })
 customer_entity = asaas_client.customers.create(customer)
 
@@ -63,13 +64,22 @@ token = Asaas::CreditCardToken.new({
 
 response = asaas_client.credit_card_tokens.create(token)
 
+# charge = Asaas::Payment.new({
+#   customer: customer_entity.id,
+#   dueDate: DateTime.now,
+#   billingType: 'BOLETO',
+#   description: "Teste de boleto",
+#   value: BigDecimal("103.54").to_f,
+#   postalService: false
+# })
+
 charge = Asaas::Payment.new({
-  customer: customer_entity.id,
+  customer: 'cus_000004863116',
   dueDate: DateTime.now,
-  billingType: 'BOLETO',
-  description: "Teste de boleto",
+  billingType: 'CREDIT_CARD',
+  description: "Teste de cartão de credito",
   value: BigDecimal("103.54").to_f,
-  postalService: false
+  creditCardToken: '02f59048-df2d-4dbc-87a5-5bf87e1e727c'
 })
 
 asaas_client.payments.create(charge)

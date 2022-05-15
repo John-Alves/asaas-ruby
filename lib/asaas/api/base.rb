@@ -74,7 +74,7 @@ module Asaas
         res
       end
 
-      def convert_data_to_entity(type)
+      def fetch_entity(type)
         if @api_version == 2
           "Asaas::Entity::#{type.capitalize}".constantize
         else
@@ -105,11 +105,16 @@ module Asaas
         entity = nil
         hash = JSON.parse(@response.body)
         puts hash if Asaas::Configuration.debug
-        if hash.fetch('object', false) === 'list'
-          entity = Asaas::Entity::Meta.new(hash)
+
+        convert_data_to_entity(hash)
+      end
+
+      def convert_data_to_entity(data)
+        if data.fetch('object', false) === 'list'
+          entity = Asaas::Entity::Meta.new(data)
         else
-          entity = convert_data_to_entity(hash.fetch('object', false))
-          entity = entity.new(hash) if entity
+          entity = fetch_entity(data.fetch('object', false))
+          entity = entity.new(data) if entity
         end
 
         entity

@@ -32,6 +32,8 @@ module Asaas
     attribute :invoiceNumber, Types::Coercible::String.optional.default(nil)
     attribute :deleted, Types::Coercible::String.optional.default(nil)
 
+    attribute :creditCardToken, Types::Coercible::String.optional.default(nil)
+
     attribute :creditDate, Types::Coercible::String.optional.default(nil)
     attribute :estimatedCreditDate, Types::Coercible::String.optional.default(nil)
   end
