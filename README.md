@@ -22,13 +22,13 @@ gem install asaas-ruby-0.2.25.gem
 
 ### Changelog
 
- - 0.2.21 - Add credit fields to Payment
- - 0.2.20 - 
- - 0.2.19 - Small fixes
- - 0.2.18 - Account documents upload
- - 0.2.17 -
- - 0.2.16 - Wallet account tranfers
- - 0.2.15 - Bank account tranfers
+- 0.2.21 - Add credit fields to Payment
+- 0.2.20 -
+- 0.2.19 - Small fixes
+- 0.2.18 - Account documents upload
+- 0.2.17 -
+- 0.2.16 - Wallet account tranfers
+- 0.2.15 - Bank account tranfers
 
 ### Requirements
 
@@ -47,9 +47,9 @@ end
 asaas_client = Asaas::Client.new()
 
 customer = Asaas::Customer.new({
-  name: 'Matheus Lessa', 
-  cpfCnpj: '44929287073',
-  email: 'mathewslessa@gmail.com',
+  name: 'Johnny Alves',
+  cpfCnpj: '05526202038',
+  email: 'teste@gmail.com',
   id: 'cus_000004838427',
 })
 customer_entity = asaas_client.customers.create(customer)
@@ -57,9 +57,9 @@ customer_entity = asaas_client.customers.create(customer)
 token = Asaas::CreditCardToken.new({
   creditCardCcv: '123',
   creditCardHolderName: "Juscelino Kubitschek",
-  creditCardExpiryMonth: 01, 
-  creditCardExpiryYear: 2025, 
-  creditCardNumber: 12345567812345678, 
+  creditCardExpiryMonth: 01,
+  creditCardExpiryYear: 2025,
+  creditCardNumber: 12345567812345678,
   customer: customer_entity.id
 })
 
