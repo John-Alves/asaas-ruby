@@ -17,6 +17,7 @@ Para fazer o build da gem
 
 ```sh
 gem build asaas-ruby.gemspec
+gem install asaas-ruby-0.2.25.gem
 ```
 
 ### Changelog
@@ -83,4 +84,5 @@ charge = Asaas::Payment.new({
 })
 
 asaas_client.payments.create(charge)
+# asaas_client.payments.fetchPixQrCode('pay_4651617361594235')
 ```

@@ -14,7 +14,7 @@ module Asaas
     attribute :province, Types::Coercible::String.optional.default(nil)
     attribute :postalCode, Types::Coercible::String.optional.default(nil)
     attribute :externalReference, Types::Coercible::String.optional.default(nil)
-    attribute :notificationDisabled, Types::Bool.optional.default(false)
+    attribute :notificationDisabled, Types::Bool.optional.default(true)
     attribute :additionalEmails, Types::Coercible::String.optional.default(nil)
     attribute :municipalInscription, Types::Coercible::String.optional.default(nil)
     attribute :stateInscription, Types::Coercible::String.optional.default(nil)

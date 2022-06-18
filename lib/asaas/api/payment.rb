@@ -6,6 +6,15 @@ module Asaas
         super(token, api_version, '/payments')
       end
 
+      def fetchPixQrCode(id)
+        request(:get, id: "#{id}/pixQrCode")
+        parse_response
+      end
+
+      def fetchPaymentBarcode(id)
+        request(:get, id: "#{id}/identificationField")
+        parse_response
+      end
     end
   end
 end
