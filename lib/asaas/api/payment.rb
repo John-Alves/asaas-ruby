@@ -6,6 +6,11 @@ module Asaas
         super(token, api_version, '/payments')
       end
 
+      def payWithCreditCard(id, body)
+        request(:post, { id: "#{id}/payWithCreditCard" }, body)
+        parse_response
+      end
+
       def fetchPixQrCode(id)
         request(:get, id: "#{id}/pixQrCode")
         parse_response
