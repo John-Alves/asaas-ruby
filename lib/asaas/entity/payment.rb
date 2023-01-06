@@ -20,9 +20,10 @@ module Asaas
       attribute :invoiceNumber, String
       attribute :invoiceUrl, String
       attribute :boletoUrl, String
-      attribute :installment, Integer
+      attribute :installment, String
       attribute :installmentCount, Integer
       attribute :installmentValue, Float
+      attribute :installmentNumber, Integer
       attribute :creditCardHolderName, String
       attribute :creditCardNumber, String
       attribute :creditCardExpiryMonth, String
