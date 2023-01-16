@@ -54,16 +54,16 @@ customer = Asaas::Customer.new({
 })
 customer_entity = asaas_client.customers.create(customer)
 
-token = Asaas::CreditCardToken.new({
-  creditCardCcv: '123',
-  creditCardHolderName: "Juscelino Kubitschek",
-  creditCardExpiryMonth: 01,
-  creditCardExpiryYear: 2025,
-  creditCardNumber: 12345567812345678,
-  customer: customer_entity.id
-})
+# token = Asaas::CreditCardToken.new({
+#   creditCardCcv: '123',
+#   creditCardHolderName: "Juscelino Kubitschek",
+#   creditCardExpiryMonth: 01,
+#   creditCardExpiryYear: 2025,
+#   creditCardNumber: 12345567812345678,
+#   customer: customer_entity.id
+# })
 
-response = asaas_client.credit_card_tokens.create(token)
+# response = asaas_client.credit_card_tokens.create(token)
 
 # charge = Asaas::Payment.new({
 #   customer: customer_entity.id,
