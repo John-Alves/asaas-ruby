@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-require 'awesome_print'
 require 'active_support'
 require 'active_support/inflector'
-require 'rest-client'
 require 'typhoeus'
 require 'dry-types'
 require 'dry-struct'

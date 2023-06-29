@@ -17,7 +17,7 @@ Para fazer o build da gem
 
 ```sh
 gem build asaas-ruby.gemspec
-gem install asaas-ruby-0.2.29.gem
+gem install asaas-ruby-1.0.2.gem
 ```
 
 ### Changelog
