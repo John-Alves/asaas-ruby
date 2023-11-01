@@ -21,6 +21,7 @@ module Asaas
     attribute :discount, Discount.optional.default(nil)
     attribute :interest, Interest.optional.default(nil)
     attribute :fine, Fine.optional.default(nil)
+    attribute :refunds, Types::Array.of(Refund).optional.default(nil)
 
     attribute :status, Status.optional.default(nil)
     attribute :dateCreated, Types::Coercible::String.optional.default(nil)
