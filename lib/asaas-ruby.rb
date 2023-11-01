@@ -23,6 +23,7 @@ module Asaas
   autoload :Discount, 'asaas/models/discount'
   autoload :Interest, 'asaas/models/interest'
   autoload :Fine, 'asaas/models/fine'
+  autoload :Refund, 'asaas/models/refund'
   autoload :Webhook, 'asaas/models/webhook'
   autoload :Account, 'asaas/models/account'
   autoload :Transfer, 'asaas/models/transfer'
