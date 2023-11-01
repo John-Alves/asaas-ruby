@@ -85,9 +85,12 @@ module Asaas
       end
 
       def request(method, params = {}, body = nil)
-        body = body.to_h
-        body = body.delete_if { |_k, v| v.nil? || v.to_s.empty? }
-        body = body.to_json
+        unless body.nil?
+          body = body.to_h
+          body = body.delete_if { |_k, v| v.nil? || v.to_s.empty? }
+          body = body.to_json
+        end
+
         @response = Typhoeus::Request.new(
           parse_url(params.fetch(:id, false)),
           method: method,
