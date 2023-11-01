@@ -9,6 +9,7 @@ module Asaas
     attribute :customer, Types::Coercible::String
     attribute :billingType, BillingTypes.optional.default(nil)
     attribute :value, Types::JSON::Decimal.optional.default(nil)
+    attribute :netValue, Types::JSON::Decimal.optional.default(nil)
     attribute :dueDate, Types::Coercible::String.optional.default(nil)
     attribute :description, Types::Coercible::String.optional.default(nil)
     attribute :externalReference, Types::Coercible::String.optional.default(nil)
